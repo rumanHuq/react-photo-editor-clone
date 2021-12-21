@@ -1,29 +1,27 @@
 {
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "html",
-  ],
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact",
-  },
-  "emmet.triggerExpansionOnTab": true,
-  "editor.formatOnSave": true,
-  "[javascript]": {
-    "editor.formatOnSave": false,
-  },
-  "[typescript][typescriptreact]": {
-    "editor.formatOnSave": false,
+  "[typescript][typescriptreact][javascript]": {
+    "editor.formatOnSave": false
   },
   "css.validate": false,
-  "less.validate": false,
-  "scss.validate": false,
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "editor.wordWrapColumn": 160,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
-  }
+  },
+  "editor.formatOnSave": true,
+  "editor.wordWrapColumn": 120,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "eslint.validate": [
+    "typescript",
+    "typescriptreact"
+  ],
+  "stylelint.validate": [
+    "typescript",
+    "typescriptreact"
+  ],
+  "less.validate": false,
+  "scss.validate": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

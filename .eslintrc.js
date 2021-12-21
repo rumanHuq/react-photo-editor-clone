@@ -1,4 +1,5 @@
 const rules = {
+  "react/jsx-props-no-spreading": 0,
   "@typescript-eslint/ban-ts-comment": 0,
   "@typescript-eslint/no-unused-vars": 0,
   "no-use-before-define": "off",
