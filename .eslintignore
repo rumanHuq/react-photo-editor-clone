@@ -1,0 +1,9 @@
+node_modules
+src/Interfaces/gql-definitions.ts
+coverage
+.vscode
+.next
+public
+cypress/**/**/*.js
+RestaurantSubpage
+bin
