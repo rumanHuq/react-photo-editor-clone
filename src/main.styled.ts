@@ -4,7 +4,11 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyles = createGlobalStyle`
   ${normalize()}
   html {
-    box-sizing: border-box;
+    box-sizing: border-box
+  }
+
+  body {
+    background-color: var(--grey13);
   }
 
   *, *::before, *::after {

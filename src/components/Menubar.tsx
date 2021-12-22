@@ -1,9 +1,13 @@
 import styled from "styled-components";
+import { Icon } from "./Icon";
 
 const MenubarWrapper = styled.nav`
   background-color: ${({ theme }) => theme.colors.grey16};
-  height: 42px;
 `;
 export const Menubar = () => {
-  return <MenubarWrapper />;
+  return (
+    <MenubarWrapper>
+      <Icon name="arrowRightCircle" variant="big" />
+    </MenubarWrapper>
+  );
 };
