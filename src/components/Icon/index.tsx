@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import type { StyledElement } from "@/@types";
-import { icons } from "@/constants";
-
-type IconName = keyof typeof icons;
+import { names, IconName } from "./names";
 
 interface IconProps extends StyledElement<HTMLSpanElement> {
   name: IconName;
@@ -16,6 +14,6 @@ const IconWrapper = styled.span<Pick<IconProps, "variant">>`
 `;
 
 export const Icon = ({ name, variant = "small", className, ...domProps }: IconProps) => {
-  const spanClassName = [icons[name], className].filter(Boolean).join(" ");
+  const spanClassName = [names[name], className].filter(Boolean).join(" ");
   return <IconWrapper className={spanClassName} variant={variant} {...domProps} />;
 };

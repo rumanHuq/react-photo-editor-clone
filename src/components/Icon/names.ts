@@ -1,4 +1,4 @@
-export const icons = {
+export const names = {
   activity: "icon-activity",
   airplay: "icon-airplay",
   alertCircle: "icon-alert-circle",
@@ -184,3 +184,5 @@ export const icons = {
   zoomIn: "icon-zoom-in",
   zoomOut: "icon-zoom-out",
 };
+
+export type IconName = keyof typeof names;
