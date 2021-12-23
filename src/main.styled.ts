@@ -1,23 +1,61 @@
 import { normalize } from "polished";
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   ${normalize()}
-  html {
-    box-sizing: border-box
-  }
-
-  body {
-    background-color: var(--grey13);
-  }
 
   *, *::before, *::after {
     box-sizing: inherit;
   }
 
-  a,button,select{
+  html {
+    box-sizing: border-box;
+    font-size: 62.5%;;
+  }
+
+  body {
+    background-color: var(--grey13);
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2.246rem;
+  }
+
+  h2 {
+    font-size: 1.872rem;
+  }
+
+  h3 {
+    font-size: 1.56rem;
+  }
+
+  p {
+    font-size: 1.3rem;
+  }
+
+
+  a,
+  button,
+  select {
     cursor: pointer;
   }
+`;
+
+/**
+ * Custom cursor: https://javascript.plainenglish.io/how-to-create-a-custom-css-pointer-in-react-2d4684215564
+ */
+
+export const AppWrapper = styled.section`
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 42px 1fr 30px;
+  height: 100vh;
+  overflow: hidden;
+  width: 100vw;
 `;
 
 export const theme = {

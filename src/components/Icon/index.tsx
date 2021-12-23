@@ -1,19 +1,20 @@
 import styled from "styled-components";
 import type { StyledElement } from "@/@types";
-import { names, IconName } from "./names";
+import { names } from "./names";
+import type { IconName } from "./names";
 
 interface IconProps extends StyledElement<HTMLSpanElement> {
   name: IconName;
-  variant?: "small" | "big";
+  big?: boolean;
 }
 
-const IconWrapper = styled.span<Pick<IconProps, "variant">>`
+const IconWrapper = styled.span<Pick<IconProps, "big">>`
   color: #fff;
   cursor: pointer;
-  font-size: ${({ variant }) => (variant === "big" ? "1.25rem" : "1.125rem")};
+  font-size: ${({ big }) => (big ? "1.25rem" : "1.125rem")};
 `;
 
-export const Icon = ({ name, variant = "small", className, ...domProps }: IconProps) => {
+export const Icon = ({ name, big = true, className, ...domProps }: IconProps) => {
   const spanClassName = [names[name], className].filter(Boolean).join(" ");
-  return <IconWrapper className={spanClassName} variant={variant} {...domProps} />;
+  return <IconWrapper className={spanClassName} big={big} {...domProps} />;
 };

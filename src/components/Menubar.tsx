@@ -7,7 +7,7 @@ const MenubarWrapper = styled.nav`
 export const Menubar = () => {
   return (
     <MenubarWrapper>
-      <Icon name="arrowRightCircle" variant="big" />
+      <Icon name="airplay" />
     </MenubarWrapper>
   );
 };
