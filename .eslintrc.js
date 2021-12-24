@@ -1,4 +1,6 @@
 const rules = {
+  "react/function-component-definition": 0,
+  "react/no-array-index-key": 0,
   "react/require-default-props": 0,
   "react/jsx-props-no-spreading": 0,
   "@typescript-eslint/ban-ts-comment": 0,
@@ -6,12 +8,6 @@ const rules = {
   "no-use-before-define": "off",
   "@typescript-eslint/no-use-before-define": ["error"],
   "prettier/prettier": "error",
-  "react/function-component-definition": [
-    2,
-    {
-      namedComponents: "arrow-function",
-    },
-  ],
   "import/extensions": 0,
   "import/prefer-default-export": 0,
   "import/no-default-export": 2,
