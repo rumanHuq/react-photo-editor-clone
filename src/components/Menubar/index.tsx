@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { Icon } from "./Icon";
+import { Icon } from "../Icon";
+import { MenuItems } from "./MenuItems";
 
 const MenubarWrapper = styled.nav`
   align-items: center;
@@ -21,26 +22,7 @@ const MenubarWrapper = styled.nav`
 export const Menubar = () => {
   return (
     <MenubarWrapper>
-      <div>
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-        <Icon name="airplay" />
-      </div>
+      <MenuItems />
       <div>
         <Icon name="alertCircle" />
         <Icon name="alertCircle" />
