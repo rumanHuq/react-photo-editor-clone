@@ -9,7 +9,6 @@ import eslint from "vite-plugin-eslint";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()].concat(
-    // @ts-expect-error
     process.env.NODE_ENV === "development" ? [viteStylelint({ include: ["**/*.styled.ts", "**/*.tsx"] }), eslint()] : []
   ),
   resolve: {
