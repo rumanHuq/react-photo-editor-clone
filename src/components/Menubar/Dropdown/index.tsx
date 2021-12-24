@@ -39,7 +39,6 @@ const DropdownContent = styled.ul<{ open: boolean }>`
       ${buttonReset}
       padding: 1rem 1.7rem;
       text-align: left;
-      text-transform: capitalize;
       width: 100%;
     }
   }

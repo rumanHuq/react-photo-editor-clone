@@ -5,20 +5,31 @@ import type { IconName } from "./names";
 
 interface IconProps extends Omit<StyledElement<HTMLSpanElement>, "as"> {
   name: IconName;
-  big?: boolean;
   as?: string;
+  variant?: "lg" | "md" | "sm";
 }
 
-const IconWrapper = styled.span<Pick<IconProps, "big" | "color">>`
+function getFontSize({ variant }: Pick<IconProps, "variant">) {
+  switch (variant) {
+    case "md":
+      return "1.25rem";
+    case "sm":
+      return "1.125rem";
+    case "lg":
+    default:
+      return "1.8rem";
+  }
+}
+
+const IconWrapper = styled.span<Pick<IconProps, "variant" | "color">>`
   color: ${({ color }) => color || "#fff"};
   cursor: pointer;
-  font-size: ${({ big }) => (big ? "1.25rem" : "1.125rem")};
+  font-size: ${getFontSize};
 `;
 
-export const Icon = ({ name, big = true, className, as, ...domProps }: IconProps) => {
+export const Icon = ({ name, className, as, ...domProps }: IconProps) => {
   const iconProps = {
     ...domProps,
-    big,
     as: as || "span",
     className: [names[name], className].filter(Boolean).join(" "),
   };

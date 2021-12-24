@@ -55,7 +55,7 @@ export const AppWrapper = styled.section`
   grid-template-rows: 42px 1fr 30px;
   height: 100vh;
   overflow: hidden;
-  width: 100vw;
+  width: max(1134px, 100vw);
 `;
 
 export const theme = {

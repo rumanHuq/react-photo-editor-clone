@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Icon } from "../Icon";
 import { MenuItems } from "./MenuItems";
+import { QuickAccess } from "./QuickAccess";
 
 const MenubarWrapper = styled.nav`
   align-items: center;
@@ -24,14 +24,9 @@ export const Menubar = () => {
     <MenubarWrapper>
       <MenuItems />
       <div>
-        <Icon name="alertCircle" />
-        <Icon name="alertCircle" />
-        <Icon name="alertCircle" />
-        <Icon name="alertCircle" />
-        <Icon name="alertCircle" />
-        <Icon name="alertCircle" />
+        <p>Untitled*</p>
       </div>
-      <Icon name="alertTriangle" />
+      <QuickAccess />
     </MenubarWrapper>
   );
 };
