@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
+// https://codepen.io/Ponomarev/pen/yLLXNLN
 import { RefObject, useEffect, useRef, useState } from "react";
 import { Layer, Stage, Text } from "react-konva";
 import type { StyledElement } from "@/@types";

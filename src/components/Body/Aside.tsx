@@ -5,16 +5,16 @@ import { SVG } from "../SVG";
 
 const AsideWrapper = styled.aside`
   background-color: ${({ theme }) => theme.colors.grey16};
-  width: 38px;
+  width: 3.8rem;
 
   .svg-wrapper {
     ${buttonReset}
 
     align-items: center;
     display: flex;
-    height: 34px;
+    height: 3.4rem;
     justify-content: center;
-    width: 38px;
+    width: 3.8rem;
 
     &:hover {
       background-color: ${({ theme }) => theme.colors.grey23};

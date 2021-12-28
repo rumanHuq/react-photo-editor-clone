@@ -22,8 +22,8 @@ const DropdownWrapper = styled.li`
 const DropdownContent = styled.ul<{ open: boolean }>`
   background-color: ${({ theme }) => theme.colors.grey19};
   display: ${({ open }) => (open ? "inline-block" : "none")};
-  left: -17px;
-  min-width: 100px;
+  left: -1.7rem;
+  min-width: 10rem;
   position: absolute;
   top: 100%;
 
@@ -47,7 +47,7 @@ const DropdownContent = styled.ul<{ open: boolean }>`
 
 interface DropdownProps<T> {
   label: string;
-  items: T[];
+  items: Readonly<T[]>;
   onClickMenuItem: (item: T) => void;
 }
 

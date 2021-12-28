@@ -1,9 +1,11 @@
+import { useRef } from "react";
 import styled, { css } from "styled-components";
 import { Icon } from "@/components/Icon";
 import { SVG } from "@/components/SVG";
 import { buttonReset, ulReset } from "@/utils/css";
 import { Dropdown } from "../Dropdown";
 import { UndoRedo } from "./UndoRedo";
+import { fileHandler } from "./filehandler.function";
 
 const MenuItemsWrapper = styled.nav`
   display: flex;
@@ -50,7 +52,7 @@ const TextMenusWrapper = styled.ul`
   font-size: 1.3rem;
 
   > li:first-child {
-    padding-left: 17px;
+    padding-left: 1.7rem;
   }
 
   > li > button {
@@ -59,9 +61,13 @@ const TextMenusWrapper = styled.ul`
   ${incrementByOneRightMargin}
 `;
 
+export const FILE_HANDLER_ITEMS = ["New", "Open", "Save", "Save as", "Quit"] as const;
+
 export const MenuItems = () => {
+  const fileUploadInputRef = useRef<HTMLInputElement>(null);
   return (
     <MenuItemsWrapper>
+      <input ref={fileUploadInputRef} onChange={(v) => console.log(v)} type="file" style={{ display: "none" }} />
       <LogoWrapper type="button">
         <SVG width={32} name="ArtboardLogo" />
         <ChevronDown />
@@ -69,8 +75,8 @@ export const MenuItems = () => {
       <TextMenusWrapper>
         <Dropdown
           label="File"
-          items={["New", "Open", "Save", "Save as", "Quit"]}
-          onClickMenuItem={(val) => console.log(val)}
+          items={FILE_HANDLER_ITEMS}
+          onClickMenuItem={(val) => fileHandler(val, { Open: () => fileUploadInputRef.current?.click() })}
         />
         <Dropdown label="Edit" items={["1", "2", "3", "4"]} onClickMenuItem={(val) => console.log(val)} />
         <Dropdown label="View" items={["1", "2", "3", "4"]} onClickMenuItem={(val) => console.log(val)} />

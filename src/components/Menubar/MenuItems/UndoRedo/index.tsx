@@ -1,14 +1,14 @@
 import styled from "styled-components";
+import { Icon } from "@/components/Icon";
 import { buttonReset } from "@/utils/css";
-import { Icon } from "../../../Icon";
 
 const UndoRedoWrapper = styled.div`
   &:first-of-type {
-    margin-right: 13.11px;
+    margin-right: 1.311rem;
   }
 
   &:nth-of-type(2) {
-    margin-right: 18.11px;
+    margin-right: 1.811rem;
   }
 `;
 
@@ -23,7 +23,7 @@ const IconWrapper = styled.button<{ width?: number }>`
   width: ${({ width }) => width && `${width}px`};
 
   &:first-child {
-    margin-right: 1.78px;
+    margin-right: 0.178rem;
   }
 
   &:disabled {

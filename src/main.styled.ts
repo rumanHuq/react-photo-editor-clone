@@ -51,8 +51,9 @@ export const GlobalStyles = createGlobalStyle`
 
 export const AppWrapper = styled.section`
   display: grid;
+  gap: 0.1rem;
   grid-template-columns: auto;
-  grid-template-rows: 42px 1fr 30px;
+  grid-template-rows: 4.2rem 1fr 3rem;
   height: 100vh;
   overflow: hidden;
   width: max(1134px, 100vw);
