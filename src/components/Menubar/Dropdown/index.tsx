@@ -8,6 +8,7 @@ const DropdownWrapper = styled.li`
   display: flex;
   height: 100%;
   position: relative;
+  z-index: 1;
 
   > button {
     ${buttonReset}

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { Icon } from "@/components/Icon";
-import SVG from "@/components/SVG";
+import { SVG } from "@/components/SVG";
 import { buttonReset, ulReset } from "@/utils/css";
 import { Dropdown } from "../Dropdown";
 import { UndoRedo } from "./UndoRedo";
@@ -67,7 +67,11 @@ export const MenuItems = () => {
         <ChevronDown />
       </LogoWrapper>
       <TextMenusWrapper>
-        <Dropdown label="File" items={["New", "Open", "Save", "Save as"]} onClickMenuItem={(val) => console.log(val)} />
+        <Dropdown
+          label="File"
+          items={["New", "Open", "Save", "Save as", "Quit"]}
+          onClickMenuItem={(val) => console.log(val)}
+        />
         <Dropdown label="Edit" items={["1", "2", "3", "4"]} onClickMenuItem={(val) => console.log(val)} />
         <Dropdown label="View" items={["1", "2", "3", "4"]} onClickMenuItem={(val) => console.log(val)} />
         <Dropdown label="Window" items={["1", "2", "3", "4"]} onClickMenuItem={(val) => console.log(val)} />

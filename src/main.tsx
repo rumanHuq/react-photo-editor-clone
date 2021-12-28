@@ -1,26 +1,28 @@
-import React from "react";
+import "./assets/style.css";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "styled-components";
+import { Body } from "./components/Body";
 import { Menubar } from "./components/Menubar";
 import { Statusbar } from "./components/Statusbar";
 import { AppWrapper, GlobalStyles, theme } from "./main.styled";
 
-import "./assets/style.css";
-
-const App = () => (
-  <AppWrapper>
-    <Menubar />
-    <main>{/*  */}</main>
-    <Statusbar />
-  </AppWrapper>
-);
+const App = () => {
+  return (
+    <AppWrapper>
+      <Menubar />
+      <Body />
+      <Statusbar />
+    </AppWrapper>
+  );
+};
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <App />
     </ThemeProvider>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById("root")
 );

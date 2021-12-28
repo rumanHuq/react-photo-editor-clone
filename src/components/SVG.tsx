@@ -64,7 +64,7 @@ const getIcon = (props: PropTypes) => {
   return <div>🤷🏽‍♂️ no icon name given</div>
 }
 
-export default(props: PropTypes) => {
+export const SVG = (props: PropTypes) => {
   const {wrapperStyle} = props;
   return wrapperStyle ? <div style={wrapperStyle}>{getIcon(props)}</div> : getIcon(props)
 }
