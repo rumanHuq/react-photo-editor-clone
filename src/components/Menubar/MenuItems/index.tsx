@@ -1,5 +1,7 @@
+import { useAtom } from "jotai";
 import { useRef } from "react";
 import { SVG } from "@/components/SVG";
+import { rootAtom } from "@/states";
 import { Dropdown } from "../Dropdown";
 import { UndoRedo } from "./UndoRedo";
 import { MenuItemsWrapper, LogoWrapper, ChevronDown, TextMenusWrapper } from "./styles";
@@ -28,9 +30,20 @@ export const MenuItems = () => {
   const fileHandlerCallbacks: FileHandlerCallbacks = {
     Open: () => fileUploadInputRef.current?.click(),
   };
+  const [, setLayers] = useAtom(rootAtom);
+  const onFileUpload = (file?: File) => {
+    if (!file) return;
+    setLayers((pre) => ({ ...pre, layers: pre.layers.concat({ file }) }));
+  };
   return (
     <MenuItemsWrapper>
-      <input ref={fileUploadInputRef} onChange={(v) => console.log(v)} type="file" style={{ display: "none" }} />
+      <input
+        ref={fileUploadInputRef}
+        onChange={(v) => onFileUpload(v.target.files?.[0])}
+        type="file"
+        style={{ display: "none" }}
+        accept="image/*"
+      />
       <LogoWrapper type="button">
         <SVG width={32} name="ArtboardLogo" />
         <ChevronDown />
