@@ -11,6 +11,7 @@ const MenubarWrapper = styled.nav`
 
   > {
     :nth-child(2) {
+      align-self: center;
       justify-self: center;
     }
 
@@ -23,9 +24,7 @@ export const Menubar = () => {
   return (
     <MenubarWrapper>
       <MenuItems />
-      <div>
-        <p>Untitled*</p>
-      </div>
+      <p>Untitled*</p>
       <QuickAccess />
     </MenubarWrapper>
   );

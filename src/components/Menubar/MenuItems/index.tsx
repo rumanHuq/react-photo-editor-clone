@@ -1,70 +1,33 @@
 import { useRef } from "react";
-import styled, { css } from "styled-components";
-import { Icon } from "@/components/Icon";
 import { SVG } from "@/components/SVG";
-import { buttonReset, ulReset } from "@/utils/css";
 import { Dropdown } from "../Dropdown";
 import { UndoRedo } from "./UndoRedo";
-import { fileHandler } from "./filehandler.function";
+import { MenuItemsWrapper, LogoWrapper, ChevronDown, TextMenusWrapper } from "./styles";
 
-const MenuItemsWrapper = styled.nav`
-  display: flex;
-  height: 100%;
+const FILE_HANDLER_ITEMS = ["New", "Open", "Save", "Save as", "Quit"] as const;
 
-  > * {
-    display: flex;
-    height: inherit;
-  }
-
-  ul {
-    ${ulReset}
-  }
-`;
-
-const LogoWrapper = styled.button`
-  ${buttonReset}
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.qtyellow};
-  gap: 0.3rem;
-  padding: 0 0.4rem;
-  width: max-content;
-`;
-
-const ChevronDown = styled(Icon).attrs(({ theme }) => ({ color: theme.colors.black, name: "chevronDown" }))`
-  font-size: 1.8rem;
-`;
-
-const incrementByOneRightMargin = () => {
-  let styles = css``;
-  for (let i = 1; i <= 4; i += 1) {
-    styles = styles.concat(css`
-      > li:nth-child(${i}) {
-        padding-right: ${24 + i}px;
-      }
-    `);
-  }
-  return styles;
+type FileHandlerCallbacks = {
+  [key in typeof FILE_HANDLER_ITEMS[number]]?: () => void;
 };
 
-const TextMenusWrapper = styled.ul`
-  align-items: center;
-  display: flex;
-  font-size: 1.3rem;
-
-  > li:first-child {
-    padding-left: 1.7rem;
+function fileHandler(prop: typeof FILE_HANDLER_ITEMS[number], cb?: FileHandlerCallbacks) {
+  switch (prop) {
+    case "Open": {
+      cb?.[prop]?.();
+      break;
+    }
+    default: {
+      console.log(prop);
+      break;
+    }
   }
-
-  > li > button {
-    ${buttonReset}
-  }
-  ${incrementByOneRightMargin}
-`;
-
-export const FILE_HANDLER_ITEMS = ["New", "Open", "Save", "Save as", "Quit"] as const;
+}
 
 export const MenuItems = () => {
   const fileUploadInputRef = useRef<HTMLInputElement>(null);
+  const fileHandlerCallbacks: FileHandlerCallbacks = {
+    Open: () => fileUploadInputRef.current?.click(),
+  };
   return (
     <MenuItemsWrapper>
       <input ref={fileUploadInputRef} onChange={(v) => console.log(v)} type="file" style={{ display: "none" }} />
@@ -76,7 +39,7 @@ export const MenuItems = () => {
         <Dropdown
           label="File"
           items={FILE_HANDLER_ITEMS}
-          onClickMenuItem={(val) => fileHandler(val, { Open: () => fileUploadInputRef.current?.click() })}
+          onClickMenuItem={(val) => fileHandler(val, fileHandlerCallbacks)}
         />
         <Dropdown label="Edit" items={["1", "2", "3", "4"]} onClickMenuItem={(val) => console.log(val)} />
         <Dropdown label="View" items={["1", "2", "3", "4"]} onClickMenuItem={(val) => console.log(val)} />
