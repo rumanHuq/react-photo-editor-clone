@@ -1,5 +1,7 @@
+import { useAtom } from "jotai";
 import { useRef, useState } from "react";
 import { useClickAway } from "react-use";
+import { readDrawingLayersAtom } from "@/components/Body/Canvas/state";
 import { DropdownWrapper, DropdownContent } from "./styles";
 
 interface DropdownProps<T> {
@@ -14,6 +16,7 @@ export function Dropdown<T>({ label, items, onClickMenuItem }: DropdownProps<T>)
   useClickAway(ref, () => {
     setOpen(false);
   });
+  const [canvasItems] = useAtom(readDrawingLayersAtom);
 
   const onClick = (item: T) => {
     onClickMenuItem(item);
@@ -21,7 +24,7 @@ export function Dropdown<T>({ label, items, onClickMenuItem }: DropdownProps<T>)
   };
 
   return (
-    <DropdownWrapper ref={ref}>
+    <DropdownWrapper ref={ref} zIndex={canvasItems.length + 1}>
       <button type="button" onClick={() => setOpen(true)}>
         {label}
       </button>

@@ -1,9 +1,9 @@
 import { useAtom } from "jotai";
 import { useRef } from "react";
 import { SVG } from "@/components/SVG";
-import { rootAtom } from "@/states";
 import { Dropdown } from "../Dropdown";
 import { UndoRedo } from "./UndoRedo";
+import { fileAtom } from "./state";
 import { MenuItemsWrapper, LogoWrapper, ChevronDown, TextMenusWrapper } from "./styles";
 
 const FILE_HANDLER_ITEMS = ["New", "Open", "Save", "Save as", "Quit"] as const;
@@ -30,10 +30,10 @@ export const MenuItems = () => {
   const fileHandlerCallbacks: FileHandlerCallbacks = {
     Open: () => fileUploadInputRef.current?.click(),
   };
-  const [, setLayers] = useAtom(rootAtom);
-  const onFileUpload = (file?: File) => {
+  const [, setFileToLayer] = useAtom(fileAtom);
+  const onFileUpload = async (file?: File) => {
     if (!file) return;
-    setLayers((pre) => ({ ...pre, layers: pre.layers.concat({ file }) }));
+    await setFileToLayer(file);
   };
   return (
     <MenuItemsWrapper>

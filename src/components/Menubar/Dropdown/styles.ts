@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { buttonReset } from "@/utils/css";
 
-export const DropdownWrapper = styled.li`
+export const DropdownWrapper = styled.li<{ zIndex: number }>`
   align-items: center;
   display: flex;
   height: 100%;
   position: relative;
-  z-index: 1;
+  z-index: ${({ zIndex }) => zIndex};
 
   > button {
     ${buttonReset}

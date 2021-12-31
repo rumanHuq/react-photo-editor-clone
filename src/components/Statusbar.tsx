@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import styled from "styled-components";
-import { cursorAtom } from "@/states";
+import { readCursorCoordAtom } from "./Body/Canvas/state";
 import { Icon } from "./Icon";
 
 const StatusbarWrapper = styled.footer`
@@ -36,16 +36,17 @@ const StatusbarWrapper = styled.footer`
   }
 `;
 export const Statusbar = () => {
-  const [{ x, y }] = useAtom(cursorAtom);
+  const [{ x, y }] = useAtom(readCursorCoordAtom);
   return (
     <StatusbarWrapper>
       <p>{`X: ${x}  Y: ${y}  Z: 0`}</p>
       <p>
-        Visualization <Icon name="chevronUp" className="chevron-down" />
+        Visualization &nbsp;
+        <Icon name="chevronUp" className="chevron-down" />
       </p>
       <p>
         <span className="box" />
-        &nbsp; Show errors
+        &nbsp;Show errors
       </p>
     </StatusbarWrapper>
   );

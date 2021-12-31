@@ -1,14 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 // https://codepen.io/Ponomarev/pen/yLLXNLN
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
+import type { KonvaEventObject } from "konva/lib/Node";
 import { RefObject, useEffect, useRef, useState } from "react";
-import { Layer, Stage, Text } from "react-konva";
+import { Layer, Stage } from "react-konva";
 import type { StyledElement } from "@/@types";
-import { rootAtom } from "@/states";
-import type { AppState } from "@/states";
+import { KonvaImage } from "@/components/KonvaComponents/Image";
+import { writeActiveLayerAtom, readDrawingLayersAtom, writeCursorCoordAtom, readActiveLayerAtom } from "./state";
 
 const useCanvasDimension = (domref: RefObject<HTMLDivElement>) => {
   const [dimension, setDimension] = useState({ width: -1, height: -1 });
@@ -21,44 +18,44 @@ const useCanvasDimension = (domref: RefObject<HTMLDivElement>) => {
   return dimension;
 };
 
-const handleMouseMoveAtom = atom(null, (_, set, { x, y }: AppState["cursor"]) => {
-  set(rootAtom, (pre) => {
-    return { ...pre, cursor: { x, y } };
-  });
-});
-
 export const Canvas = (domProps: Partial<StyledElement<HTMLDivElement>>) => {
   const ref = useRef<HTMLDivElement>(null);
   const { height, width } = useCanvasDimension(ref);
-  const [, handleMouseMove] = useAtom(handleMouseMoveAtom);
+  const [drawingLayers] = useAtom(readDrawingLayersAtom);
+  const [, setActiveLayer] = useAtom(writeActiveLayerAtom);
+  const [activeLayer] = useAtom(readActiveLayerAtom);
+  const { index: activeLayerIndex } = activeLayer || {};
+  const [, handleMouseMove] = useAtom(writeCursorCoordAtom);
+
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     handleMouseMove({ x: e.clientX, y: e.clientY });
   };
-  const [textState, setTextState] = useState({ isDragging: true, x: 250, y: 250 });
+  const onClickAway = (e: KonvaEventObject<MouseEvent> | KonvaEventObject<TouchEvent>) => {
+    const clickedOnEmpty = e.target === e.target.getStage();
+    if (clickedOnEmpty) {
+      setActiveLayer({ idx: undefined });
+    }
+  };
+
   return (
     <div {...{ ...domProps, onMouseMove, ref }}>
-      <Stage {...{ height, width }}>
-        <Layer>
-          <Text
-            text="Draggable Text"
-            x={textState.x}
-            y={textState.y}
-            draggable
-            fill={textState.isDragging ? "green" : "white"}
-            onDragMove={(e) => {
-              const x = e.target.x();
-              const y = e.target.y();
-              if (x <= 0 || y <= 0 || x >= width - 90 || y >= height - 15) {
-                e.target.stopDrag();
-                return;
-              }
-              setTextState({ x, y, isDragging: true });
-            }}
-            onDragEnd={() => {
-              setTextState({ ...textState, isDragging: false });
-            }}
-          />
-        </Layer>
+      <Stage {...{ height, width, onMouseDown: onClickAway, onTouchStart: onClickAway }}>
+        {drawingLayers.map(
+          (layer, key) =>
+            layer.isImage() && (
+              <Layer key={key}>
+                <KonvaImage
+                  {...{
+                    imageProps: layer.getImage(),
+                    isSelected: key === activeLayerIndex,
+                    onSelect: () => setActiveLayer({ idx: key }),
+                    onChange: (image) => setActiveLayer({ idx: key, value: { image } }),
+                  }}
+                />
+              </Layer>
+            )
+        )}
+        <Layer />
       </Stage>
     </div>
   );
