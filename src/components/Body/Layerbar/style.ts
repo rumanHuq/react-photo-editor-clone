@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Icon } from "@/components/Icon";
-import { buttonReset } from "@/utils/css";
+import { buttonReset, ulReset } from "@/utils/css";
 
 export const LayerbarWrapper = styled.section`
   background-color: ${({ theme }) => theme.colors.grey19};
@@ -16,9 +16,7 @@ export const LayerbarWrapper = styled.section`
   }
 
   ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    ${ulReset}
 
     > :not(:first-child) {
       margin-top: 0.4rem;

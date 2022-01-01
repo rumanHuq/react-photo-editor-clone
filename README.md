@@ -1,4 +1,11 @@
-# Qt development task
+# Technology used
+
+- UI => React
+- Style => Styled-components
+- Reactivity/State-management => Jotai
+- Canvas => React-konva
+
+# Objectives
 
 - We expect you to develop a quick example of the design we provide.
 - You can use what ever methods and code to achieve an end result, as long as it can be shown in a browser.
