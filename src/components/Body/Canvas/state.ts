@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import type { NodeConfig } from "konva/lib/Node";
-import { cloneDeep } from "lodash";
+import cloneDeep from "lodash.clonedeep";
 
 interface CursorCoord {
   x: number;

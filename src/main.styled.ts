@@ -1,9 +1,7 @@
-import { normalize } from "polished";
 import styled, { createGlobalStyle } from "styled-components";
+import "normalize.css";
 
 export const GlobalStyles = createGlobalStyle`
-  ${normalize()}
-
   *, *::before, *::after {
     box-sizing: inherit;
   }
@@ -44,10 +42,6 @@ export const GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }
 `;
-
-/**
- * Custom cursor: https://javascript.plainenglish.io/how-to-create-a-custom-css-pointer-in-react-2d4684215564
- */
 
 export const AppWrapper = styled.section`
   display: grid;

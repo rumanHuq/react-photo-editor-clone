@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import styled from "styled-components";
-import { readCursorCoordAtom } from "./Body/Canvas/state";
-import { Icon } from "./Icon";
+import { readCursorCoordAtom } from "../Body/Canvas/state";
+import { Icon } from "../Icon";
 
 const StatusbarWrapper = styled.footer`
   background-color: ${({ theme }) => theme.colors.grey19};
