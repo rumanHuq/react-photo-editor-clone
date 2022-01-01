@@ -1,49 +1,49 @@
 import { useAtom } from "jotai";
-import { useRef } from "react";
 import { SVG } from "@/components/SVG";
 import { Dropdown } from "../Dropdown";
 import { UndoRedo } from "./UndoRedo";
-import { fileAtom } from "./state";
+import { writeMenuItemActionAtom } from "./state";
+import type { MenuItemAction } from "./state";
 import { MenuItemsWrapper, LogoWrapper, ChevronDown, TextMenusWrapper } from "./styles";
 
-const FILE_HANDLER_ITEMS = ["New", "Open", "Save", "Save as", "Quit"] as const;
+const FILE_HANDLER_ITEMS = [
+  { label: "New", value: "new" },
+  { label: "Save", value: "save" },
+  { label: "Import file", value: "import_local" },
+  { label: "Export", value: "export" },
+  { label: "Quit", value: "quit" },
+];
 
-type FileHandlerCallbacks = {
-  [key in typeof FILE_HANDLER_ITEMS[number]]?: () => void;
-};
-
-function fileHandler(prop: typeof FILE_HANDLER_ITEMS[number], cb?: FileHandlerCallbacks) {
+function onClickFileMenuItem(
+  prop: Readonly<typeof FILE_HANDLER_ITEMS[number]["value"]>,
+  cb: (update?: MenuItemAction | undefined) => void
+) {
   switch (prop) {
-    case "Open": {
-      cb?.[prop]?.();
+    case "import_local": {
+      cb("OPEN_LOCAL_FILE");
+      break;
+    }
+    case "export": {
+      cb("SAVE_FILE_LOCALLY");
       break;
     }
     default: {
-      console.log(prop);
+      cb(undefined);
       break;
     }
   }
 }
 
 export const MenuItems = () => {
-  const fileUploadInputRef = useRef<HTMLInputElement>(null);
-  const fileHandlerCallbacks: FileHandlerCallbacks = {
-    Open: () => fileUploadInputRef.current?.click(),
-  };
-  const [, setFileToLayer] = useAtom(fileAtom);
-  const onFileUpload = async (file?: File) => {
-    if (!file) return;
-    await setFileToLayer(file);
-  };
+  const [, setMenuItem] = useAtom(writeMenuItemActionAtom);
+  const genericItem = [
+    { label: "1", value: "1" },
+    { label: "2", value: "2" },
+    { label: "3", value: "3" },
+    { label: "4", value: "4" },
+  ];
   return (
     <MenuItemsWrapper>
-      <input
-        ref={fileUploadInputRef}
-        onChange={(v) => onFileUpload(v.target.files?.[0])}
-        type="file"
-        style={{ display: "none" }}
-        accept="image/*"
-      />
       <LogoWrapper type="button">
         <SVG width={32} name="ArtboardLogo" />
         <ChevronDown />
@@ -52,11 +52,11 @@ export const MenuItems = () => {
         <Dropdown
           label="File"
           items={FILE_HANDLER_ITEMS}
-          onClickMenuItem={(val) => fileHandler(val, fileHandlerCallbacks)}
+          onClickMenuItem={(val) => onClickFileMenuItem(val, setMenuItem)}
         />
-        <Dropdown label="Edit" items={["1", "2", "3", "4"]} onClickMenuItem={(val) => console.log(val)} />
-        <Dropdown label="View" items={["1", "2", "3", "4"]} onClickMenuItem={(val) => console.log(val)} />
-        <Dropdown label="Window" items={["1", "2", "3", "4"]} onClickMenuItem={(val) => console.log(val)} />
+        <Dropdown label="Edit" items={genericItem} onClickMenuItem={(val) => console.log(val)} />
+        <Dropdown label="View" items={genericItem} onClickMenuItem={(val) => console.log(val)} />
+        <Dropdown label="Window" items={genericItem} onClickMenuItem={(val) => console.log(val)} />
       </TextMenusWrapper>
       <UndoRedo />
     </MenuItemsWrapper>

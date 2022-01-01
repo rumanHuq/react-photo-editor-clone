@@ -5,6 +5,8 @@ import { RefObject, useEffect, useRef, useState } from "react";
 import { Layer, Stage } from "react-konva";
 import type { StyledElement } from "@/@types";
 import { KonvaImage } from "@/components/KonvaComponents/Image";
+import { FileExporter } from "./FileExporter";
+import { FileUploader } from "./FileUploader/FileUploader";
 import { writeActiveLayerAtom, readDrawingLayersAtom, writeCursorCoordAtom, readActiveLayerAtom } from "./state";
 
 const useCanvasDimension = (domref: RefObject<HTMLDivElement>) => {
@@ -20,6 +22,7 @@ const useCanvasDimension = (domref: RefObject<HTMLDivElement>) => {
 
 export const Canvas = (domProps: Partial<StyledElement<HTMLDivElement>>) => {
   const ref = useRef<HTMLDivElement>(null);
+  const stageRef = useRef(null);
   const { height, width } = useCanvasDimension(ref);
   const [drawingLayers] = useAtom(readDrawingLayersAtom);
   const [, setActiveLayer] = useAtom(writeActiveLayerAtom);
@@ -39,24 +42,28 @@ export const Canvas = (domProps: Partial<StyledElement<HTMLDivElement>>) => {
 
   return (
     <div {...{ ...domProps, onMouseMove, ref }}>
-      <Stage {...{ height, width, onMouseDown: onClickAway, onTouchStart: onClickAway }}>
-        {drawingLayers.map(
-          (layer, key) =>
-            layer.isImage() && (
-              <Layer key={key}>
-                <KonvaImage
-                  {...{
-                    imageProps: layer.getImage(),
-                    isSelected: key === activeLayerIndex,
-                    onSelect: () => setActiveLayer({ idx: key }),
-                    onChange: (image) => setActiveLayer({ idx: key, value: { image } }),
-                  }}
-                />
-              </Layer>
-            )
-        )}
+      <Stage {...{ ref: stageRef, height, width, onMouseDown: onClickAway, onTouchStart: onClickAway }}>
+        {drawingLayers
+          .map(
+            (layer, key) =>
+              layer.isImage() && (
+                <Layer key={key}>
+                  <KonvaImage
+                    {...{
+                      imageProps: layer.getImage(),
+                      isSelected: key === activeLayerIndex,
+                      onSelect: () => setActiveLayer({ idx: key }),
+                      onChange: (image) => setActiveLayer({ idx: key, value: { image } }),
+                    }}
+                  />
+                </Layer>
+              )
+          )
+          .filter(Boolean)}
         <Layer />
       </Stage>
+      <FileUploader />
+      <FileExporter stageRef={stageRef} />
     </div>
   );
 };

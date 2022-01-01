@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 
-export type DRAWING_MODE = "MOVE" | "SELECT_FREE_RANGE" | "DRAW" | "CROP" | "SELECT_RECT" | "RESIZE" | "ADD";
+export type DRAWING_MODE = "MOVE" | "SELECT_FREE_RANGE" | "DRAW" | "CROP" | "DRAW_RECT" | "RESIZE" | "ADD";
 
 const drawingModeAtom = atom<DRAWING_MODE>("RESIZE");
 export const readDrawingModeAtom = atom((get) => get(drawingModeAtom));

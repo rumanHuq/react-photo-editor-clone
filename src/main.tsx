@@ -3,8 +3,6 @@ import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "styled-components";
 import { Body } from "./components/Body";
-import { Icon } from "./components/Icon";
-import { names } from "./components/Icon/names";
 import { Menubar } from "./components/Menubar";
 import { Statusbar } from "./components/Statusbar";
 import { AppWrapper, GlobalStyles, theme } from "./main.styled";

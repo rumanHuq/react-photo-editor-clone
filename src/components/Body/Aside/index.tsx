@@ -33,24 +33,23 @@ const AsideWrapper = styled.aside`
 const SVGIcon = styled(SVG).attrs(() => ({ color: "#fff", width: 20 }))``;
 export const AsideLeft = () => {
   const [drawingMode, setDrawingMode] = useAtom(readWriteDrawingModeAtom);
-
-  const icons = {
+  const icons: { [key in DRAWING_MODE]: string } = {
     ADD: "SelectionToolIcon",
-    CROP: "DirectSelectionToolIcon",
+    MOVE: "DirectSelectionToolIcon",
     DRAW: "PenIcon",
     RESIZE: "DrawIcon",
-    MOVE: "CreateRectangleIcon",
-    SELECT_FREE_RANGE: "CropIcon",
-    SELECT_RECT: "file",
+    DRAW_RECT: "CreateRectangleIcon",
+    CROP: "CropIcon",
+    SELECT_FREE_RANGE: "file",
   };
   return (
     <AsideWrapper>
       {Object.entries(icons).map((entry, idx) => {
         const [modeKey, modeValue] = entry as [DRAWING_MODE, SVGIconName];
         const className = ["svg-wrapper", modeKey === drawingMode ? "active" : ""].filter(Boolean).join(" ");
-        if (modeKey === "SELECT_RECT") {
+        if (modeKey === "SELECT_FREE_RANGE") {
           return (
-            <button className={className} type="button" key={idx} onClick={() => setDrawingMode("SELECT_RECT")}>
+            <button className={className} type="button" key={idx} onClick={() => setDrawingMode("SELECT_FREE_RANGE")}>
               <Icon name="file" />
             </button>
           );

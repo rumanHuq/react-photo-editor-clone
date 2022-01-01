@@ -4,13 +4,18 @@ import { useClickAway } from "react-use";
 import { readDrawingLayersAtom } from "@/components/Body/Canvas/state";
 import { DropdownWrapper, DropdownContent } from "./styles";
 
-interface DropdownProps<T> {
+interface DropdownItem {
   label: string;
-  items: Readonly<T[]>;
-  onClickMenuItem: (item: T) => void;
+  value: string;
 }
 
-export function Dropdown<T>({ label, items, onClickMenuItem }: DropdownProps<T>) {
+interface DropdownProps<T extends DropdownItem> {
+  label: string;
+  items: T[];
+  onClickMenuItem: (item: string) => void;
+}
+
+export function Dropdown<T extends DropdownItem>({ label, items, onClickMenuItem }: DropdownProps<T>) {
   const ref = useRef(null);
   const [open, setOpen] = useState(false);
   useClickAway(ref, () => {
@@ -18,8 +23,8 @@ export function Dropdown<T>({ label, items, onClickMenuItem }: DropdownProps<T>)
   });
   const [canvasItems] = useAtom(readDrawingLayersAtom);
 
-  const onClick = (item: T) => {
-    onClickMenuItem(item);
+  const onClick = (item: DropdownItem) => {
+    onClickMenuItem(item.value);
     setOpen(false);
   };
 
@@ -32,7 +37,7 @@ export function Dropdown<T>({ label, items, onClickMenuItem }: DropdownProps<T>)
         {items.map((item, i) => (
           <li key={i}>
             <button type="button" onClick={() => onClick(item)}>
-              {item}
+              {item.label}
             </button>
           </li>
         ))}
