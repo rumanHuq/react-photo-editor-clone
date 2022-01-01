@@ -3,6 +3,7 @@ import { useAtom } from "jotai";
 import type { KonvaEventObject } from "konva/lib/Node";
 import { RefObject, useEffect, useRef, useState } from "react";
 import { Layer, Stage } from "react-konva";
+import { useWindowSize } from "react-use";
 import type { StyledElement } from "@/@types";
 import { KonvaImage } from "@/components/KonvaComponents/Image";
 import { FileExporter } from "./FileExporter";
@@ -11,12 +12,12 @@ import { writeActiveLayerAtom, readDrawingLayersAtom, writeCursorCoordAtom, read
 
 const useCanvasDimension = (domref: RefObject<HTMLDivElement>) => {
   const [dimension, setDimension] = useState({ width: -1, height: -1 });
-
+  const windowSize = useWindowSize();
   useEffect(() => {
     if (domref.current) {
       setDimension({ width: domref.current.offsetWidth - 10, height: domref.current.offsetHeight });
     }
-  }, [domref]);
+  }, [domref, windowSize]);
   return dimension;
 };
 
