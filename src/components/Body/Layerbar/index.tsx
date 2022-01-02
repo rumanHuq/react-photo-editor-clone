@@ -12,8 +12,8 @@ export const Layerbar = () => {
   const layerName = (layer: typeof layers[number]) => {
     let title = "";
     if (layer.isImage()) {
-      title = layer.getImage().alt || "";
-    } else {
+      title = layer.getImage().name || "";
+    } else if (layer.isCanvas()) {
       title = layer.getCanvas().name;
     }
     if (minimized) title = title.slice(0, 3);

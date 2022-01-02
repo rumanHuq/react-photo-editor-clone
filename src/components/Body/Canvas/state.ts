@@ -1,6 +1,8 @@
 import { atom } from "jotai";
-import type { NodeConfig } from "konva/lib/Node";
+import type { NodeConfig as NodeConfigBase } from "konva/lib/Node";
 import cloneDeep from "lodash.clonedeep";
+
+type NodeConfig = Omit<NodeConfigBase, "src" | "name">;
 
 interface CursorCoord {
   x: number;
@@ -13,8 +15,8 @@ interface Canvas {
 }
 
 export interface ImageProps extends NodeConfig {
+  name: string;
   src: string;
-  alt: string;
 }
 type DrawingLayerType = { image: ImageProps } | { canvas: Canvas };
 
@@ -114,5 +116,5 @@ const toBase64 = (file: File) =>
 
 export const fileAtom = atom(null, async (_get, set, file: File) => {
   const src = await toBase64(file);
-  set(writeDrawingLayersAtom, { image: { ...imageProps, src, alt: file.name } });
+  set(writeDrawingLayersAtom, { image: { ...imageProps, src, name: file.name } });
 });
