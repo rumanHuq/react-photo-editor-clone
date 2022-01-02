@@ -1,6 +1,6 @@
 import styled from "styled-components";
+import { AppSettings } from "./AppSettings";
 import { MenuItems } from "./MenuItems";
-import { QuickAccess } from "./QuickAccess";
 
 const MenubarWrapper = styled.nav`
   align-items: center;
@@ -25,7 +25,7 @@ export const Menubar = () => {
     <MenubarWrapper>
       <MenuItems />
       <p>Untitled*</p>
-      <QuickAccess />
+      <AppSettings />
     </MenubarWrapper>
   );
 };

@@ -5,7 +5,7 @@ import { RefObject, useEffect, useRef, useState } from "react";
 import { Layer, Stage } from "react-konva";
 import { useWindowSize } from "react-use";
 import type { StyledElement } from "@/@types";
-import { KonvaImage } from "@/components/KonvaComponents/Image";
+import { KonvaImage } from "@/components/Body/Canvas/KonvaComponents/Image";
 import { FileExporter } from "./FileExporter";
 import { FileUploader } from "./FileUploader/FileUploader";
 import { writeActiveLayerAtom, readDrawingLayersAtom, writeCursorCoordAtom, readActiveLayerAtom } from "./state";

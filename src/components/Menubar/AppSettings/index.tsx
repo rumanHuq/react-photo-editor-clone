@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Icon } from "@/components/Icon";
 
-const QuickAccessWrapper = styled.div`
+const AppSettingsWrapper = styled.div`
   display: flex;
 
   > {
@@ -19,13 +19,13 @@ const QuickAccessWrapper = styled.div`
   }
 `;
 
-export const QuickAccess = () => {
+export const AppSettings = () => {
   return (
-    <QuickAccessWrapper>
+    <AppSettingsWrapper>
       <Icon name="bell" />
       <Icon name="sun" />
       <Icon name="globe" />
       <Icon name="helpCircle" />
-    </QuickAccessWrapper>
+    </AppSettingsWrapper>
   );
 };

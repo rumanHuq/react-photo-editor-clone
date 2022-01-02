@@ -3,8 +3,8 @@ import type { KonvaEventObject } from "konva/lib/Node";
 import React from "react";
 import { Transformer, Image } from "react-konva";
 import type { KonvaNodeEvents } from "react-konva";
-import { readDrawingModeAtom } from "../Body/Aside/state";
-import type { ImageProps } from "../Body/Canvas/state";
+import { readDrawingModeAtom } from "@/components/Body/Aside/state";
+import type { ImageProps } from "../state";
 
 export interface KonvaImageProps {
   isSelected: boolean;

@@ -1,5 +1,5 @@
 import { CSSProp } from "styled-components";
-import { AppTheme } from "../main.styled";
+import { AppTheme } from "@/components/App/style";
 
 declare module "styled-components" {
   export interface DefaultTheme extends AppTheme {
